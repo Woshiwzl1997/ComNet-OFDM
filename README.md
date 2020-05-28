@@ -22,9 +22,7 @@ python:3.6
 You can re-train this model on Ubuntu system.
 
 
-#Get Start
-
-
+# Get Start
 Train:
 
 
@@ -37,13 +35,11 @@ Test and Plot:
 python main_comnet.py --train_flag False --plot True
 
 
-#Tips:
+# Tips:
 
 
 Every 128 bits datas are predicted by 8 deep models.The first model predict [0:16] bits,the second model predict [16:32], etc.This code only includes the first model.You can also try to convert the size 16 to other numbers.
 
 
 If you think this work is helpful to you, click "Star' to let me know.
-
-
 
