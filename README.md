@@ -23,9 +23,14 @@ You can re-train this model on Ubuntu system.
 
 
 # Get Start
-Train:
+1.Download data from：
+Link：https://pan.baidu.com/s/1N_OLJYWlyDukM3-tx2BgZQ 
+password：ep86 
+
+Move dataset to ./datas folder
 
 
+2.Train
 python main_comnet.py --train_flag True 
 
 
