@@ -35,10 +35,12 @@ Move dataset to ./datas folder
 
 
 2.Train
+
+
 python main_comnet.py --train_flag True 
 
 
-Test and Plot:
+3.Test and Plot:
 
 
 python main_comnet.py --train_flag False --plot True
