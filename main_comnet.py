@@ -42,7 +42,7 @@ def model(args):
     temp = Dense(n_hidden_1, activation='relu')(temp)  # 'relu->liner'
     temp = BatchNormalization()(temp)
     out_put1 = Dense(n_h, activation='relu')(temp)  # Channel estimation output
-    out_put1 = BatchNormalization()(out_put1)
+    out_put1 = BatchNormalization(name='h_predict_output')(out_put1)
 
     # out_put1=Reshape((int(payloadBits_per_OFDM/2),2))(out_put1)
 
@@ -78,7 +78,7 @@ def model(args):
 
     temp_lstm = Bidirectional(LSTM(n_BiLSTM_3))(temp_lstm)
 
-    final_output = Dense(n_output, activation='sigmoid')(temp_lstm)
+    final_output = Dense(n_output, activation='sigmoid',name='model_output')(temp_lstm)
     model = Model(inputs=[input_LS, input_DATA], outputs=final_output)
     model.compile(optimizer='adam', loss='mse', metrics=[bit_err])
     model.summary()
@@ -100,7 +100,7 @@ def model(args):
         # save h_predict
         if args.save_h_pred == True:
             h_layer = Model(inputs=model.input,
-                            outputs=model.get_layer('batch_normalization_3').output)  # output result of h_pred
+                            outputs=model.get_layer('h_predict_output').output)  # output result of h_pred
             h_output = h_layer.predict_generator(test_gen(100, 10, save_data=True), steps=1)
             sio.savemat('./matlab_draw_plot/h_predict_freq.mat', {'h_p': h_output})
 

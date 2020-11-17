@@ -21,7 +21,7 @@ def training_gen(bs, SNRdb = 20):
             input_hls.append(h_ls)#add h_ls to input_1
             signal_output=signal_output.reshape((-1,2),order='F')#reshape(128,1) to (64,2) with column first
             input_data.append(signal_output)#add data passed through channel to input_2
-        yield ({'input_1':np.asarray(input_hls),'input_2':np.asarray(input_data)}, {'dense_3':np.asarray(input_labels)})
+        yield ({'input_1':np.asarray(input_hls),'input_2':np.asarray(input_data)}, {'model_output':np.asarray(input_labels)})
 
 
 def validation_gen(bs, SNRdb = 20):
@@ -45,7 +45,7 @@ def validation_gen(bs, SNRdb = 20):
         # sio.savemat('init_bits_{}.mat'.format(str(SNRdb)), {'bit_SNR_{}'.format(str(SNRdb)):all_bits})
         # sio.savemat('h_ls_real+imag_{}.mat'.format(str(SNRdb)), {'h_SNR_{}'.format(str(SNRdb)): input_hls})
 
-        yield ({'input_1':np.asarray(input_hls),'input_2':np.asarray(input_data)}, {'dense_3':np.asarray(input_labels)})
+        yield ({'input_1':np.asarray(input_hls),'input_2':np.asarray(input_data)}, {'model_output':np.asarray(input_labels)})
 
 def test_gen(bs, SNRdb = 20,save_data=False):
     while True:
@@ -69,4 +69,4 @@ def test_gen(bs, SNRdb = 20,save_data=False):
             sio.savemat('./matlab_draw_plot/h_ls_draw.mat', {'h_ls': input_hls})
             sio.savemat('./matlab_draw_plot/y_real+imag_draw',{'y':input_data})
             sio.savemat('./matlab_draw_plot/init_bits_draw.mat', {'bit':all_bits})
-        yield ({'input_1': np.asarray(input_hls), 'input_2': np.asarray(input_data)}, {'dense_3': np.asarray(input_labels)})
+        yield ({'input_1': np.asarray(input_hls), 'input_2': np.asarray(input_data)}, {'model_output': np.asarray(input_labels)})
